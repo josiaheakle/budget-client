@@ -1,0 +1,20 @@
+.Login {
+	width: 20rem;
+	height: 30rem;
+	padding: 2rem;
+
+	display: grid;
+	grid-template-rows: min-content auto min-content;
+
+	text-align: center;
+
+	background-color: coral;
+	border-radius: var(--br);
+	box-shadow: 1px 2px 2px var(--shadow-color);
+}
+
+.Heading {
+	height: 4rem;
+	margin-bottom: 0.5rem;
+	font-size: var(--h2);
+}

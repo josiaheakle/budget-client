@@ -17,7 +17,8 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
-			"@backend/*": ["../server/src/*"]
+			"@backend/*": ["../server/src/*"],
+			"jwe-react-form": ["../../../jwe_libs/jwe-react-form"]
 		}
 	},
 	"include": ["src"],

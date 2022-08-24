@@ -1,13 +1,112 @@
+@import url("/node_modules/jwe-react-form/dist/style.css");
+
+html {
+	font-size: 100%;
+	--shadow-color: #000000e3;
+
+	--h1: 2.488rem;
+	--h2: 2.074rem;
+	--h3: 1.728rem;
+	--h4: 1.44rem;
+	--h5: 1.2rem;
+	--br: 2rem;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+body {
+	font-weight: 400;
+	line-height: 1.75;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 400;
+	line-height: 1.3;
+}
+
+h1 {
+	font-size: 2.488rem;
+}
+
+h2 {
+	font-size: 2.074rem;
+}
+
+h3 {
+	font-size: 1.728rem;
+}
+
+h4 {
+	font-size: 1.44rem;
+}
+
+h5 {
+	font-size: 1.2rem;
+}
+
+small,
+.text_small {
+	font-size: 0.833rem;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+.page {
+	width: 100vw;
+	min-height: 100vh;
+	padding: 0 20vw;
+}
+
+/* SOME UTILITY FLEX CLASSES */
+
+.flex-center,
+.flex-row,
+.flex-column {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-center {
+	align-items: center;
+	justify-content: center;
 }
