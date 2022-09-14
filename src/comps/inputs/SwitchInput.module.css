@@ -1,0 +1,44 @@
+.Container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 1.8rem;
+	border-radius: 2rem;
+	background-color: #d9d9d9;
+}
+
+.Option {
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	outline: none;
+	background-color: unset;
+	cursor: pointer;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.OptionText {
+	transition: font-size 250ms, transform 250ms;
+	font-size: 0.5em;
+	text-align: center;
+}
+
+.Option:hover .OptionText,
+.Option:focus-visible .OptionText {
+	transform: translateY(-150%);
+	font-size: 1rem;
+}
+
+.Selection {
+	position: absolute;
+	width: 2rem;
+	height: 2rem;
+	z-index: 0;
+	transition: transform 250ms;
+	border-radius: 1rem;
+	background-color: #00bbff;
+}

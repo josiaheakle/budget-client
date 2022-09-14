@@ -6,6 +6,7 @@ import { Form, TextInput, useInputValue } from "jwe-react-form";
 import { UserHandler } from "../../../modules/UserHandler";
 
 import * as css from "./Login.module.css";
+import { SwitchInput } from "../../inputs/SwitchInput";
 
 interface LoginProps {}
 
@@ -35,12 +36,21 @@ export const Login: React.FC<LoginProps> = ({}) => {
 		}
 	};
 
-	React.useEffect(() => {
-		console.log({ email, password });
-	}, [email, password]);
+	const onSwitchChange = (value: string | number) => {
+		console.log({ value });
+	};
 
 	return (
 		<main className="page flex-center">
+			<SwitchInput
+				options={{
+					Zero: 0,
+					One: 1,
+					Two: 2,
+				}}
+				onSwitchChange={onSwitchChange}
+			/>
+
 			<div className={`${css.Login}`}>
 				<h1 className={`${css.Heading}`}>{isNewUser ? "Register" : "Login"}</h1>
 				<Form onSubmit={userLogin}>
