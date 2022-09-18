@@ -3,7 +3,7 @@ import * as React from "react";
 import * as css from "./SwitchInput.module.css";
 
 interface SwitchOptions {
-	[index: string]: string | number;
+	[index: string | number]: string;
 }
 
 interface SwitchInputProps {
@@ -43,13 +43,13 @@ export const SwitchInput: React.FC<SwitchInputProps> = ({
 			{Object.entries(options).map(([key, value], i) => (
 				<button
 					key={i}
-					className={`${css.Option}`}
+					className={`${css.Option} ${i === index ? css.active : ""}`}
 					onClick={() => {
 						setIndex(i);
-						setValue(value);
+						setValue(key);
 					}}
 				>
-					<span className={`${css.OptionText}`}>{key}</span>
+					<span className={`${css.OptionText}`}>{value}</span>
 				</button>
 			))}
 		</div>

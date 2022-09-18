@@ -1,21 +1,29 @@
-import { User } from "src/types/User";
-import { toastFetch, easyFetch } from "./util/FetchUtil";
-import { ServerResponse } from "../../../shared/types/ServerResponse";
+import { User } from "src/types/User"
+import { toastFetch, easyFetch } from "./util/FetchUtil"
+import { ServerResponse } from "../../../shared/types/ServerResponse"
+import toast from "react-hot-toast"
 
 /**
  * Core for all requests that require user data.
  */
 abstract class UserHandler {
-	protected static user: User;
-	protected static jwt: string;
+	protected static user: User | undefined
+	protected static jwt: string
+
+	public static refreshJWT() {
+		const jwt = localStorage.getItem("jwt")
+		if (jwt) UserHandler.jwt = jwt
+	}
 
 	/**
 	 * Gets user from self or tries to retrieve from server.
 	 * Does not handle any errors.
 	 */
 	public static async getUser() {
-		if (!UserHandler.user) await UserHandler.getUserFromServer();
-		return UserHandler.user;
+		if (!UserHandler.user) {
+			await UserHandler.getUserFromServer()
+		}
+		return UserHandler.user
 	}
 
 	/**
@@ -23,15 +31,23 @@ abstract class UserHandler {
 	 * NOTE: Does not return user
 	 */
 	private static async getUserFromServer() {
-		const reqInit = UserHandler.createRequestInit({
-			method: "GET",
-			mode: "cors",
-		});
-		try {
-			const data = await easyFetch("/auth/user", reqInit);
-			if (data.isValid) UserHandler.user = data.data as User;
-		} catch (error) {
-			throw { msg: "Cannot retrieve user data from server", error };
+		this.refreshJWT()
+		if (this.jwt) {
+			const reqInit = UserHandler.createRequestInit({
+				method: "GET",
+				mode: "cors",
+			})
+			try {
+				const data = await easyFetch("/auth/user", reqInit)
+				if (data.isValid === true) UserHandler.user = data.data as User
+				if (data.isValid === false) {
+					UserHandler.user = undefined
+					// localStorage.removeItem("jwt")
+				}
+			} catch (error) {
+				throw { msg: "Cannot retrieve user data from server", error }
+			}
+		} else {
 		}
 	}
 
@@ -52,13 +68,34 @@ abstract class UserHandler {
 				email,
 				password,
 			}),
-		});
+		})
 		if (data.isValid) {
-			localStorage.setItem("jwt", data.data.jwt);
-			UserHandler.jwt = data.data.jwt;
-			await UserHandler.getUserFromServer();
-			return UserHandler.user;
-		} else return false;
+			localStorage.setItem("jwt", data.data.jwt)
+			UserHandler.jwt = data.data.jwt
+			await UserHandler.getUserFromServer()
+			return UserHandler.user || false
+		} else return false
+	}
+
+	public static async registerUser(
+		email: string,
+		password: string,
+		firstName: string,
+		lastName: string
+	) {
+		const data = await toastFetch("/auth/register", {
+			method: "post",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({ email, password, firstName, lastName }),
+		})
+		if (data.isValid) {
+			localStorage.setItem("jwt", data.data.jwt)
+			UserHandler.jwt = data.data.jwt
+			await UserHandler.getUserFromServer()
+			return UserHandler.user
+		} else return false
 	}
 
 	/**
@@ -67,12 +104,19 @@ abstract class UserHandler {
 	 * @param init fetch RequestInit object to apply headers to
 	 */
 	public static createRequestInit(init?: RequestInit): RequestInit {
-		if (!UserHandler.jwt) throw `No JWT in UserHandler to create request init.`;
-		const headers: HeadersInit = {
-			Authorization: `Bearer ${UserHandler.jwt}`,
-		};
-		return { ...init, headers };
+		if (!UserHandler.jwt) {
+			this.refreshJWT()
+		}
+		let headers: HeadersInit
+		if (UserHandler.jwt) {
+			headers = {
+				Authorization: `Bearer ${UserHandler.jwt}`,
+			}
+		} else {
+			headers = {}
+		}
+		return { ...init, headers }
 	}
 }
 
-export { UserHandler };
+export { UserHandler }

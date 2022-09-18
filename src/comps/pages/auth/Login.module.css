@@ -8,13 +8,17 @@
 
 	text-align: center;
 
-	background-color: coral;
+	color: white;
+	background-color: var(--main);
 	border-radius: var(--br);
 	box-shadow: 1px 2px 2px var(--shadow-color);
 }
 
 .Heading {
-	height: 4rem;
 	margin-bottom: 0.5rem;
 	font-size: var(--h2);
+}
+
+.Login > form {
+	color: black;
 }

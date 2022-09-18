@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ProtectedRoute } from "../middleware/ProtectedRoute";
-import { Login } from "./auth/Login";
-import { Dashboard } from "./dash/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ProtectedRoute } from "../middleware/ProtectedRoute"
+import { Login } from "./auth/Login"
+import { Dashboard } from "./dash/Dashboard"
 
 const Router = () => {
 	return (
@@ -15,7 +15,7 @@ const Router = () => {
 				</Routes>
 			</BrowserRouter>
 		</div>
-	);
-};
+	)
+}
 
-export default Router;
+export default Router

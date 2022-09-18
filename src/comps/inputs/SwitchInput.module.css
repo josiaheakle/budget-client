@@ -2,14 +2,16 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 1.8rem;
-	border-radius: 2rem;
-	background-color: #d9d9d9;
+	height: 1rem;
+	width: fit-content;
+	border-radius: 1rem;
+	background-color: var(--grey);
 }
 
 .Option {
-	width: 2rem;
-	height: 2rem;
+	color: white;
+	width: 1.5rem;
+	height: 1.5rem;
 	border: none;
 	outline: none;
 	background-color: unset;
@@ -22,23 +24,31 @@
 }
 
 .OptionText {
-	transition: font-size 250ms, transform 250ms;
-	font-size: 0.5em;
+	opacity: 0;
+	pointer-events: none;
+	transition: font-size 300ms, transform 300ms, opacity 300ms;
+	font-size: 0.4em;
 	text-align: center;
 }
 
 .Option:hover .OptionText,
 .Option:focus-visible .OptionText {
+	opacity: 1;
 	transform: translateY(-150%);
-	font-size: 1rem;
+	font-size: 0.9rem;
+}
+
+.Option.active:hover .OptionText,
+.Option.active:focus-visible .OptionText {
+	opacity: 0;
 }
 
 .Selection {
 	position: absolute;
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	z-index: 0;
 	transition: transform 250ms;
 	border-radius: 1rem;
-	background-color: #00bbff;
+	background-color: var(--light);
 }

@@ -1,0 +1,18 @@
+.Button {
+	cursor: pointer;
+	width: 8rem;
+	max-width: 10vw;
+	margin: 0.5rem 0;
+	height: 2rem;
+	text-align: center;
+	border-radius: var(--br);
+	border: 1px solid var(--dark);
+	transition: transform 250ms, outline-offset 50ms;
+	outline: 1px solid var(--dark);
+	outline-offset: -1px;
+}
+
+.Button:hover,
+.Button:focus-visible {
+	outline-offset: 0.1rem;
+}

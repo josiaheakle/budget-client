@@ -10,15 +10,22 @@
  * @date 9/11/2022
  */
 
-import DataObject from "./DataObject";
-import { DataType } from "../types/DataSchema";
+import DataObject from "./DataObject"
+
+export interface DataType {
+	[index: string]: string | number | DataType
+}
+
+export interface DataSchema {
+	[index: string]: String | Number | typeof DataObject
+}
 
 export default class DataManager<ServerResponse> {
-	private apiUrl: string;
-	private token: string;
+	private apiUrl: string
+	private token: string
 	constructor(apiUrl: string, jwtToken: string) {
-		this.apiUrl = apiUrl;
-		this.token = jwtToken;
+		this.apiUrl = apiUrl
+		this.token = jwtToken
 	}
 
 	/**
@@ -28,10 +35,10 @@ export default class DataManager<ServerResponse> {
 	 * @returns server reponse parsed to json
 	 */
 	private async callEndpoint(path: RequestInfo | URL, config?: RequestInit) {
-		const init: RequestInit = this.createRequestInit(config);
-		const res = await fetch(`${this.apiUrl}/${path}`, init);
-		const data: ServerResponse = await res.json();
-		return data;
+		const init: RequestInit = this.createRequestInit(config)
+		const res = await fetch(`${this.apiUrl}/${path}`, init)
+		const data: ServerResponse = await res.json()
+		return data
 	}
 
 	/**
@@ -39,17 +46,17 @@ export default class DataManager<ServerResponse> {
 	 * @param init fetch RequestInit object to apply headers to
 	 */
 	private createRequestInit(init?: RequestInit): RequestInit {
-		if (!this.token) throw `No JWT in UserHandler to create request init.`;
+		if (!this.token) throw `No JWT in UserHandler to create request init.`
 		const headers: HeadersInit = {
 			Authorization: `Bearer ${this.token}`,
-		};
-		const initHeaders = init?.headers;
+		}
+		const initHeaders = init?.headers
 		if (initHeaders) {
 			for (const [key, val] of Object.entries(initHeaders)) {
-				headers[key] = val;
+				headers[key] = val
 			}
 		}
-		return { ...init, headers };
+		return { ...init, headers }
 	}
 
 	/**
@@ -60,7 +67,7 @@ export default class DataManager<ServerResponse> {
 		return await this.callEndpoint(dataObj.apiPath, {
 			method: "PUT",
 			body: dataObj.getDataJson(),
-		});
+		})
 	}
 
 	/**
@@ -71,6 +78,6 @@ export default class DataManager<ServerResponse> {
 		return await this.callEndpoint(dataObj.apiPath, {
 			method: "POST",
 			body: dataObj.getDataJson(),
-		});
+		})
 	}
 }
