@@ -10,6 +10,7 @@
 	transition: transform 250ms, outline-offset 50ms;
 	outline: 1px solid var(--dark);
 	outline-offset: -1px;
+	background-color: white;
 }
 
 .Button:hover,

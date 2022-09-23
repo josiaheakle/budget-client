@@ -8,6 +8,7 @@ html {
 	--light: #72afd5;
 	--main: #0471a6;
 	--dark: #061826;
+	--error: #e73939;
 
 	--h1: 2.488rem;
 	--h2: 2.074rem;
@@ -95,8 +96,15 @@ dd {
 	margin: 0;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .page {
 	width: 100vw;
+	overflow-x: hidden;
 	min-height: 100vh;
 	padding: 0 20vw;
 }

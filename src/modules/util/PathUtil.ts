@@ -19,5 +19,13 @@ export function routeData(dataType: DataType, view: "view" | "edit", uuid?: stri
  * @param dataType Name of data type being viewed
  */
 export function updateRoute(dataType: DataType) {
-	return `/${dataType}`
+	const dataRoute: {
+		[key in DataType]: string
+	} = {
+		"expense-category": "/expense/category",
+		budget: "",
+		expense: "",
+		user: "/auth/user",
+	}
+	return dataRoute[dataType]
 }

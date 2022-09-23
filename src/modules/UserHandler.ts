@@ -1,7 +1,5 @@
-import { User } from "src/types/User"
+import { User } from "../../../shared/types/ClientModels"
 import { toastFetch, easyFetch } from "./util/FetchUtil"
-import { ServerResponse } from "../../../shared/types/ServerResponse"
-import toast from "react-hot-toast"
 
 /**
  * Core for all requests that require user data.
@@ -42,7 +40,7 @@ abstract class UserHandler {
 				if (data.isValid === true) UserHandler.user = data.data as User
 				if (data.isValid === false) {
 					UserHandler.user = undefined
-					// localStorage.removeItem("jwt")
+					localStorage.removeItem("jwt")
 				}
 			} catch (error) {
 				throw { msg: "Cannot retrieve user data from server", error }
@@ -70,7 +68,7 @@ abstract class UserHandler {
 			}),
 		})
 		if (data.isValid) {
-			localStorage.setItem("jwt", data.data.jwt)
+			localStorage.setItem("jwt", (data.data as Data).jwt)
 			UserHandler.jwt = data.data.jwt
 			await UserHandler.getUserFromServer()
 			return UserHandler.user || false
@@ -111,6 +109,7 @@ abstract class UserHandler {
 		if (UserHandler.jwt) {
 			headers = {
 				Authorization: `Bearer ${UserHandler.jwt}`,
+				"Content-Type": "application/json",
 			}
 		} else {
 			headers = {}

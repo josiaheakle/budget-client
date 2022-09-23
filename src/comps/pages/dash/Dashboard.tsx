@@ -6,6 +6,7 @@
  */
 
 import * as React from "react"
+import { ExpenseCategoryForm } from "../../forms/ExpenseCategoryForm"
 import { useInputValue } from "../../../hooks/InputHooks"
 import { TextInput } from "../../inputs/TextInput"
 
@@ -16,7 +17,7 @@ export const Dashboard: React.FC<DashboardProps> = ({}) => {
 
 	return (
 		<div className="page">
-			<TextInput id="id" label="LABEL" onInputChange={setInput} />
+			<ExpenseCategoryForm />
 		</div>
 	)
 }

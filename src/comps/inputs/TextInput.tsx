@@ -8,12 +8,14 @@ interface TextInputProps extends React.HTMLProps<HTMLInputElement> {
 	containerId?: string
 	id: string
 	label: string
+	errors?: Array<string>
 	onInputChange: (value: string | undefined) => void
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
 	containerClass,
 	containerId,
+	errors,
 	label,
 	id,
 	onInputChange,
@@ -38,7 +40,7 @@ export const TextInput: React.FC<TextInputProps> = ({
 		console.log(inputRef.current)
 		setTimeout(() => {
 			if (inputRef.current?.matches(":-internal-autofill-selected")) setIsEmtpy(false)
-		})
+		}, 500)
 		if (inputRef.current && inputRef.current.value.length > 0) setInputValue(inputRef.current.value)
 	}, [])
 
@@ -62,6 +64,15 @@ export const TextInput: React.FC<TextInputProps> = ({
 				id={id}
 				className={`${css.Input}${props.className ? ` ${props.className}` : ""}`}
 			/>
+			{errors ? (
+				<div className={`${css.Errors}`}>
+					{errors.map((error, i) => (
+						<span key={i} className={`${css.Error}`}>
+							{error}
+						</span>
+					))}
+				</div>
+			) : null}
 		</div>
 	)
 }

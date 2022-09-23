@@ -27,7 +27,7 @@ const App: React.FC<AppProps> = ({}) => {
 
 	return (
 		<UserContext.Provider value={{ user, isLoading }}>
-			<Toaster />
+			<Toaster position="bottom-left" />
 			<Router />
 		</UserContext.Provider>
 	)

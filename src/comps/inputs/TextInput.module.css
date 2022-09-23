@@ -4,7 +4,6 @@
 	width: 20vw;
 	max-width: 20rem;
 	min-width: 12rem;
-	height: 2.5rem;
 
 	display: flex;
 	flex-direction: column;
@@ -40,11 +39,17 @@
 	border: 1px solid var(--dark);
 
 	outline-offset: -1px;
-	border-radius: 0.5rem;
+	border-radius: var(--br);
 
 	transition: outline-offset 50ms;
 }
 
 .Input:focus-visible {
 	outline-offset: 0.1rem;
+}
+
+.Errors {
+	color: var(--error);
+	padding-left: calc(0.5rem + 1px);
+	font-size: var(--small-font);
 }
