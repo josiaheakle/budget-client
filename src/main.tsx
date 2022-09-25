@@ -4,6 +4,4 @@ import App from "./comps/App"
 import "./assets/index.css"
 import { DataController } from "./modules/DataController"
 
-DataController.initModels()
-
 ReactDOM.createRoot(document.getElementById("root")!).render(<App />)

@@ -37,14 +37,18 @@ class DataModel<T extends ModelBase> {
 	 * @param data
 	 */
 	private updateData(data: T) {
-		console.log({ dataBefore: this.data, newData: data })
 		const dataCutArray = this.data.filter((d) => d.uuid !== data.uuid)
-		console.log({ dataCutArray })
 		dataCutArray.push(data)
 		this.data = dataCutArray
-		if (this.updateCallbacks.hasOwnProperty(data.uuid)) {
-			for (const cb of this.updateCallbacks[data.uuid]) {
-				cb(data)
+		this.callUpdateCallbacks(data)
+	}
+
+	private callUpdateCallbacks(data?: T) {
+		if (data) {
+			if (this.updateCallbacks.hasOwnProperty(data.uuid)) {
+				for (const cb of this.updateCallbacks[data.uuid]) {
+					cb(data)
+				}
 			}
 		}
 		if (this.updateCallbacks.hasOwnProperty("all")) {
@@ -75,8 +79,10 @@ class DataModel<T extends ModelBase> {
 				method: "GET",
 			})
 		)
-		if (res.isValid) this.data = res.data as Array<T>
-		else throw `Unable to get server data for ${this.dataType}`
+		if (res.isValid) {
+			this.data = res.data as Array<T>
+			this.callUpdateCallbacks()
+		} else throw `Unable to get server data for ${this.dataType}`
 	}
 
 	/**
@@ -110,7 +116,7 @@ export abstract class DataController {
 		else return model.data as Array<T>
 	}
 
-	static async initModels() {
+	static async refreshModels() {
 		console.log("inititating models", this.models)
 		try {
 			for (const model of Object.values(this.models)) {

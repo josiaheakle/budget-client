@@ -7,11 +7,26 @@ import { toastFetch, easyFetch } from "./util/FetchUtil"
  */
 abstract class UserHandler {
 	protected static user: User | undefined
-	protected static jwt: string
+	protected static jwt: string | undefined
+	protected static updateCallbacks: Array<(user: User | undefined) => void> = []
+
+	private static clearJWT() {
+		localStorage.removeItem("jwt")
+		UserHandler.jwt = undefined
+	}
 
 	public static refreshJWT() {
 		const jwt = localStorage.getItem("jwt")
 		if (jwt) UserHandler.jwt = jwt
+	}
+
+	public static addCallback(cb: (user: User | undefined) => void) {
+		this.updateCallbacks.push(cb)
+		const removeCallback = () => {
+			const index = this.updateCallbacks.findIndex((callback) => cb === callback)
+			delete this.updateCallbacks[index]
+		}
+		return removeCallback
 	}
 
 	/**
@@ -23,6 +38,10 @@ abstract class UserHandler {
 			await UserHandler.getUserFromServer()
 		}
 		return UserHandler.user
+	}
+
+	private static callUpdateCallbacks = () => {
+		this.updateCallbacks.forEach((cb) => cb(this.user))
 	}
 
 	/**
@@ -38,7 +57,10 @@ abstract class UserHandler {
 			})
 			try {
 				const data = await easyFetch("/auth/user", reqInit)
-				if (data.isValid === true) UserHandler.user = data.data as User
+				if (data.isValid === true) {
+					UserHandler.user = data.data as User
+					this.callUpdateCallbacks()
+				}
 				if (data.isValid === false) {
 					UserHandler.user = undefined
 					localStorage.removeItem("jwt")
@@ -58,6 +80,7 @@ abstract class UserHandler {
 	 * @param password user's password
 	 */
 	public static async loginUser(email: string, password: string): Promise<User | false> {
+		this.clearJWT()
 		const data = await toastFetch("/auth/login", {
 			method: "post",
 			headers: {
@@ -82,6 +105,7 @@ abstract class UserHandler {
 		firstName: string,
 		lastName: string
 	) {
+		this.clearJWT()
 		const data = await toastFetch("/auth/register", {
 			method: "post",
 			headers: {
