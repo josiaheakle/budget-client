@@ -9,7 +9,7 @@ import { DataController } from "../../modules/DataController"
 
 interface ExpenseCategoryFormProps {
 	editExpenseCategory?: ExpenseCategory
-	postSubmit?: (data: ServerResponse) => {}
+	postSubmit?: (data: ServerResponse) => void
 }
 
 export const ExpenseCategoryForm: React.FC<ExpenseCategoryFormProps> = ({
@@ -31,7 +31,7 @@ export const ExpenseCategoryForm: React.FC<ExpenseCategoryFormProps> = ({
 	}
 
 	React.useEffect(() => {
-		setName(editExpenseCategory?.name)
+		setName(editExpenseCategory?.name ?? "")
 	}, [editExpenseCategory])
 
 	return (

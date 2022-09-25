@@ -29,7 +29,7 @@ export const TextInput: React.FC<TextInputProps> = ({
 	const [isFocused, setIsFocused] = React.useState(false)
 
 	React.useEffect(() => {
-		if (props.value) setInputValue(props.value as string)
+		if (props.value !== undefined) setInputValue(props.value as string)
 	}, [props.value])
 
 	// Check for value and set isEmpty accordingly

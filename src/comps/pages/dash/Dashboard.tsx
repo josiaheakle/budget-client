@@ -29,7 +29,10 @@ export const Dashboard: React.FC<DashboardProps> = ({}) => {
 	return (
 		<div className="page">
 			<span>{user?.firstName}</span>
-			<ExpenseCategoryForm editExpenseCategory={editCategory} />
+			<ExpenseCategoryForm
+				editExpenseCategory={editCategory}
+				postSubmit={() => setEditCategory(undefined)}
+			/>
 			<ExpenseCategoryList onEdit={(cat) => setEditCategory(cat)} />
 		</div>
 	)
