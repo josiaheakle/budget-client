@@ -22,6 +22,5 @@
 			"jwe-react-form": ["../../../jwe_libs/jwe-react-form"]
 		}
 	},
-	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

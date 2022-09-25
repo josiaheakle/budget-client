@@ -4,8 +4,10 @@ html {
 	--header-font: "Raleway", sans-serif;
 
 	--shadow-color: #000000e3;
-	--grey: #666666;
-	--light: #72afd5;
+	--grey: #9EADBD;
+	--contrast: #E59D23;
+	--light: #D3F4FF;
+	--middle: #59A5DD;
 	--main: #0471a6;
 	--dark: #061826;
 	--error: #e73939;
@@ -68,6 +70,10 @@ h4 {
 
 h5 {
 	font-size: 1.2rem;
+}
+
+a {
+	color: var(--light);
 }
 
 small,

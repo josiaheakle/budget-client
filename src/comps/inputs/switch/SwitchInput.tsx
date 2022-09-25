@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from "react"
 
-import * as css from "./SwitchInput.module.css";
+import * as css from "./SwitchInput.module.css"
 
 interface SwitchOptions {
-	[index: string | number]: string;
+	[index: string | number]: string
 }
 
 interface SwitchInputProps {
-	options: SwitchOptions;
-	backgroundColorContainer?: string;
-	backgroundColorSelection?: string;
-	onSwitchChange: (value: string | number) => void;
+	options: SwitchOptions
+	backgroundColorContainer?: string
+	backgroundColorSelection?: string
+	onSwitchChange: (value: string | number) => void
 }
 
 export const SwitchInput: React.FC<SwitchInputProps> = ({
@@ -19,12 +19,12 @@ export const SwitchInput: React.FC<SwitchInputProps> = ({
 	backgroundColorSelection,
 	onSwitchChange,
 }) => {
-	const [value, setValue] = React.useState(Object.values(options)[0]);
-	const [index, setIndex] = React.useState(0);
+	const [value, setValue] = React.useState(Object.values(options)[0])
+	const [index, setIndex] = React.useState(0)
 
 	React.useEffect(() => {
-		onSwitchChange(value);
-	}, [value]);
+		onSwitchChange(value)
+	}, [value])
 
 	return (
 		<div
@@ -45,13 +45,13 @@ export const SwitchInput: React.FC<SwitchInputProps> = ({
 					key={i}
 					className={`${css.Option} ${i === index ? css.active : ""}`}
 					onClick={() => {
-						setIndex(i);
-						setValue(key);
+						setIndex(i)
+						setValue(key)
 					}}
 				>
 					<span className={`${css.OptionText}`}>{value}</span>
 				</button>
 			))}
 		</div>
-	);
-};
+	)
+}

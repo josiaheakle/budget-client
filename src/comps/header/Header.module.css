@@ -1,0 +1,13 @@
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 4rem;
+    background-color: var(--contrast);
+    box-shadow: 0 2px 2px var(--dark);
+}
+
+.AccountLink {
+
+}

@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { UserHandler } from "../../../modules/UserHandler"
 
 import * as css from "./Login.module.css"
-import { SwitchInput } from "../../inputs/SwitchInput"
-import { TextInput } from "../../inputs/TextInput"
-import { Button } from "../../inputs/Button"
+import { SwitchInput, TextInput, Button } from "../../inputs"
 import { RequestErrors } from "../../../../../shared/types/ServerResponse"
 
 interface LoginProps {}
@@ -27,7 +25,9 @@ export const Login: React.FC<LoginProps> = ({}) => {
 		e.preventDefault()
 		if (email && password) {
 			const user = await UserHandler.loginUser(email, password)
-			if (user) nav("/")
+			if (user) {
+				nav("/")
+			}
 		} else {
 			setErrors({
 				email: ["Required."],
@@ -40,7 +40,9 @@ export const Login: React.FC<LoginProps> = ({}) => {
 		e.preventDefault()
 		if (email && password && firstName && lastName) {
 			const user = await UserHandler.registerUser(email, password, firstName, lastName)
-			if (user) nav("/")
+			if (user) {
+				nav("/")
+			}
 		}
 	}
 

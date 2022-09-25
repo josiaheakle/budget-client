@@ -3,8 +3,7 @@ import { updateRoute } from "../../modules/util/PathUtil"
 
 import { ExpenseCategory } from "../../../../shared/types/ClientModels"
 import { Data, RequestErrors, ServerResponse } from "../../../../shared/types/ServerResponse"
-import { TextInput } from "../inputs/TextInput"
-import { Button } from "../inputs/Button"
+import { TextInput, Button } from "../inputs"
 import { DataController } from "../../modules/DataController"
 
 interface ExpenseCategoryFormProps {

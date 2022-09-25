@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useInputValue } from "../../hooks/InputHooks"
+import { useInputValue } from "../../../hooks/InputHooks"
 
 import * as css from "./TextInput.module.css"
 

@@ -14,6 +14,13 @@
 	background-color: white;
 }
 
+:global(.small).Button {
+	min-width: 4rem;
+	width: 6vw;
+	max-width: 6rem;
+	font-size: var(--small-font);
+}
+
 .Button:hover,
 .Button:focus-visible {
 	outline-offset: 0.1rem;
