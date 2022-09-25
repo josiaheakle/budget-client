@@ -1,8 +1,9 @@
 .Container {
-	margin-top: 0.5rem;
 	position: relative;
-	width: 20vw;
-	max-width: 20rem;
+
+	margin-top: 0.5rem;
+	width: min(25vw, 18rem);
+	max-width: 100%;
 	min-width: 12rem;
 
 	display: flex;

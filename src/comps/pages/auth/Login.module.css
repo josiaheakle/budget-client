@@ -3,6 +3,7 @@
 	height: 30rem;
 	padding: 2rem;
 
+	box-sizing: content-box;
 	display: grid;
 	grid-template-rows: min-content auto min-content;
 

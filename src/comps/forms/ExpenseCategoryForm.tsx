@@ -2,10 +2,10 @@ import * as React from "react"
 import { updateRoute } from "../../modules/util/PathUtil"
 
 import { ExpenseCategory } from "../../../../shared/types/ClientModels"
-import { RequestErrors, ServerResponse } from "../../../../shared/types/ServerResponse"
-import { formFetch, updateServerData } from "../../modules/util/FetchUtil"
+import { Data, RequestErrors, ServerResponse } from "../../../../shared/types/ServerResponse"
 import { TextInput } from "../inputs/TextInput"
 import { Button } from "../inputs/Button"
+import { DataController } from "../../modules/DataController"
 
 interface ExpenseCategoryFormProps {
 	editExpenseCategory?: ExpenseCategory
@@ -16,23 +16,23 @@ export const ExpenseCategoryForm: React.FC<ExpenseCategoryFormProps> = ({
 	editExpenseCategory,
 	postSubmit,
 }) => {
-	const [name, setName] = React.useState<string | undefined>(editExpenseCategory?.name)
+	const [name, setName] = React.useState<string | undefined>(editExpenseCategory?.name ?? "")
 	const [errors, setErrors] = React.useState<RequestErrors>()
 
 	const submit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-
-		const res = await updateServerData(
-			"expense-category",
-			{
-				name,
-			},
-			true
-		)
-		console.log({ res })
+		let updateData: Data = {
+			name,
+		}
+		if (editExpenseCategory) updateData.uuid = editExpenseCategory.uuid
+		const res = await DataController.models["expense-category"].updateServerData(updateData, true)
 		if (!res.isValid) setErrors(res.errors)
 		else if (postSubmit) postSubmit(res)
 	}
+
+	React.useEffect(() => {
+		setName(editExpenseCategory?.name)
+	}, [editExpenseCategory])
 
 	return (
 		<form className="flex-column flex-center" onSubmit={submit}>
@@ -40,6 +40,7 @@ export const ExpenseCategoryForm: React.FC<ExpenseCategoryFormProps> = ({
 				id="category-name-input"
 				label="Title"
 				errors={errors?.name ?? undefined}
+				value={name}
 				onInputChange={setName}
 			/>
 			<Button>Submit</Button>

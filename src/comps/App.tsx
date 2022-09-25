@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserContext"
 import { useAsyncEffect } from "../hooks/ReactHelperHooks"
 import { UserHandler } from "../modules/UserHandler"
 
-import { User } from "src/types/User"
+import { User } from "../../../shared/types/ClientModels"
 
 interface AppProps {}
 

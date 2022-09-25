@@ -26,7 +26,6 @@ export const Login: React.FC<LoginProps> = ({}) => {
 	const userLogin = async (e: React.FormEvent) => {
 		e.preventDefault()
 		if (email && password) {
-			console.log("login")
 			const user = await UserHandler.loginUser(email, password)
 			if (user) nav("/")
 		} else {

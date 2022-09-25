@@ -28,6 +28,10 @@ export const TextInput: React.FC<TextInputProps> = ({
 	const [isEmpty, setIsEmtpy] = React.useState(true)
 	const [isFocused, setIsFocused] = React.useState(false)
 
+	React.useEffect(() => {
+		if (props.value) setInputValue(props.value as string)
+	}, [props.value])
+
 	// Check for value and set isEmpty accordingly
 	React.useEffect(() => {
 		onInputChange(inputValue)
@@ -37,11 +41,9 @@ export const TextInput: React.FC<TextInputProps> = ({
 
 	// Check for initial value and set input value
 	React.useEffect(() => {
-		console.log(inputRef.current)
 		setTimeout(() => {
 			if (inputRef.current?.matches(":-internal-autofill-selected")) setIsEmtpy(false)
 		}, 500)
-		if (inputRef.current && inputRef.current.value.length > 0) setInputValue(inputRef.current.value)
 	}, [])
 
 	return (
@@ -57,6 +59,7 @@ export const TextInput: React.FC<TextInputProps> = ({
 			<input
 				name={id}
 				{...props}
+				value={inputValue}
 				ref={inputRef}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}

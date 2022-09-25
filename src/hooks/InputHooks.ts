@@ -43,10 +43,9 @@ export const useInputValue = (): [
 	/**
 	 * Gets the value of the input from each input change event
 	 */
-	const [inputValue, setInputValue] = React.useState<string>()
+	const [inputValue, setInputValue] = React.useState<string>("")
 
 	const onInputChange = (e: InputChangeEvent) => {
-		console.log(e)
 		setInputValue(e.target.value)
 	}
 

@@ -1,4 +1,5 @@
 import { User } from "../../../shared/types/ClientModels"
+import { Data } from "../../../shared/types/ServerResponse"
 import { toastFetch, easyFetch } from "./util/FetchUtil"
 
 /**
@@ -69,7 +70,7 @@ abstract class UserHandler {
 		})
 		if (data.isValid) {
 			localStorage.setItem("jwt", (data.data as Data).jwt)
-			UserHandler.jwt = data.data.jwt
+			UserHandler.jwt = (data.data as Data).jwt
 			await UserHandler.getUserFromServer()
 			return UserHandler.user || false
 		} else return false
@@ -89,8 +90,8 @@ abstract class UserHandler {
 			body: JSON.stringify({ email, password, firstName, lastName }),
 		})
 		if (data.isValid) {
-			localStorage.setItem("jwt", data.data.jwt)
-			UserHandler.jwt = data.data.jwt
+			localStorage.setItem("jwt", (data.data as Data).jwt)
+			UserHandler.jwt = (data.data as Data).jwt
 			await UserHandler.getUserFromServer()
 			return UserHandler.user
 		} else return false

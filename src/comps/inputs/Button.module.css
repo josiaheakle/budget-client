@@ -1,7 +1,8 @@
 .Button {
 	cursor: pointer;
-	width: 8rem;
-	max-width: 10vw;
+	min-width: 6rem;
+	width: 10vw;
+	max-width: 8rem;
 	margin: 0.5rem 0;
 	height: 2rem;
 	text-align: center;
