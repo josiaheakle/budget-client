@@ -4,7 +4,9 @@ import { useUser } from "../../hooks/UserHooks"
 
 import * as css from "./Header.module.css"
 
-interface HeaderProps {}
+interface HeaderProps {
+	pageRoute: string
+}
 
 const Header: React.FC<HeaderProps> = ({}) => {
 	const user = useUser()

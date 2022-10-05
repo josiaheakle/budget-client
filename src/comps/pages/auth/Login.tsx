@@ -26,7 +26,9 @@ export const Login: React.FC<LoginProps> = ({}) => {
 		if (email && password) {
 			const user = await UserHandler.loginUser(email, password)
 			if (user) {
+				console.log("should nav")
 				nav("/")
+				console.log("done nav")
 			}
 		} else {
 			setErrors({
@@ -41,6 +43,7 @@ export const Login: React.FC<LoginProps> = ({}) => {
 		if (email && password && firstName && lastName) {
 			const user = await UserHandler.registerUser(email, password, firstName, lastName)
 			if (user) {
+				console.log("should nav")
 				nav("/")
 			}
 		}

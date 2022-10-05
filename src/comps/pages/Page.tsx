@@ -1,12 +1,11 @@
 import * as React from "react"
-import { Header } from "../header/Header"
 
-interface PageProps {}
+interface PageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Page: React.FC<PageProps> = ({}) => {
+const Page: React.FC<PageProps> = ({ children, ...props }) => {
 	return (
-		<div className={`page`}>
-			<Header />
+		<div {...props} className={`page ${props.className ?? ""}`}>
+			{children}
 		</div>
 	)
 }

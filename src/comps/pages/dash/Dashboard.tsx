@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useUser } from "../../../hooks/UserHooks"
 import { DataController } from "../../../modules/DataController"
-import { Header } from "../../header/Header"
+import { Page } from "../Page"
 
 interface DashboardProps {}
 
@@ -12,11 +12,7 @@ const Dashboard: React.FC<DashboardProps> = ({}) => {
 		DataController.refreshModels()
 	}, [])
 
-	return (
-		<main className={`page`}>
-			<Header />
-		</main>
-	)
+	return <Page>budget</Page>
 }
 
 export { Dashboard }

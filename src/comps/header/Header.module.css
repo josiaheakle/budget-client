@@ -11,3 +11,41 @@
 .AccountLink {
 
 }
+
+.Nav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.NavLinks {
+    margin: 1rem 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+    color: var(--contrast);
+    right: -150%;
+}
+
+.NavLink {
+    text-align: end;
+    transition: transform 250ms;
+    height: 2rem;
+}
+
+.NavLink > a {
+    display: block;
+    transition: transform 250ms;
+}
+
+:global(.open).Nav .NavLink {
+    transform: translateX(-150%);
+}
+
+:global(.open).Nav .NavLink:hover a,
+:global(.open).Nav .NavLink:focus-visible a {
+    transform: translateX(-10%);
+}

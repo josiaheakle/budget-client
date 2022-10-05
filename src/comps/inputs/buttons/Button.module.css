@@ -25,3 +25,52 @@
 .Button:focus-visible {
 	outline-offset: 0.1rem;
 }
+
+
+.MenuButton {
+	background-color: transparent;
+	width: fit-content;
+	height: 2rem;
+	outline: none;
+	border: none;
+	transition: transform 250ms;
+	cursor: pointer;
+}
+
+
+.MenuButton > div {
+	z-index: 1;
+	transform-origin: 50% 50%;
+	margin: .2rem 0;
+	background-color: var(--main);
+	width: 2.5rem;
+	border-radius: 1rem;
+	height: .3rem;
+	/* box-shadow: 0px 0px 2px var(--grey); */
+	transition: box-shadow 250ms, transform 250ms ease-out, opacity 250ms;
+}
+
+.MenuButton:hover,
+.MenuButton:focus-visible {
+	transform: scale(1.1);
+}
+
+.MenuButton:hover > div,
+.MenuButton:focus-visible > div {
+	/* box-shadow: 2px 2px 2px var(--grey); */
+}
+
+
+:global(.open).MenuButton > div:nth-of-type(1) {
+	transform: translateY(.5rem) rotate(45deg) ;
+
+}
+
+:global(.open).MenuButton > div:nth-of-type(2) {
+	opacity: 0;
+}
+
+:global(.open).MenuButton > div:nth-of-type(3) {
+	transform : translateY(-.5rem) rotate(-45deg) ;
+
+}
